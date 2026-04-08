@@ -1,15 +1,12 @@
 body{
-
 margin:0;
-
 font-family:sans-serif;
-
-background:#0f2027;
-
+background:url("images/bg.jpg");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
 color:white;
-
 transition:0.4s;
-
 }
 
 .dark{

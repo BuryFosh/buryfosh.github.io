@@ -217,3 +217,12 @@ transition:0.4s;
 .gallery img:hover{
 transform:scale(1.1);
 }
+
+.gallery{
+animation:scroll 20s linear infinite;
+}
+
+@keyframes scroll{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+}

@@ -217,7 +217,7 @@ animation:scroll 40s linear infinite;
 }
 
 .gallery img{
-height:110px;
+height:160px;
 width:auto;
 border-radius:12px;
 flex-shrink:0;

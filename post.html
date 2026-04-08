@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
 
 <meta charset="UTF-8">
+
+<title>文章</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -12,7 +13,25 @@
 
 <body>
 
-<div id="post"></div>
+<div class="progress"></div>
+
+<div class="article">
+
+<a class="back" href="index.html">← 返回首页</a>
+
+<h1 id="title"></h1>
+
+<div class="meta">
+
+<span id="date"></span>
+
+<span id="tag"></span>
+
+</div>
+
+<div id="content"></div>
+
+</div>
 
 <script>
 
@@ -28,17 +47,28 @@ fetch("posts.json")
 
 const post=posts.find(p=>p.id==id)
 
-document.getElementById("post").innerHTML=`
+document.getElementById("title").innerText=post.title
 
-<h1>${post.title}</h1>
+document.getElementById("date").innerText=post.date
 
-<p>${post.date}</p>
+document.getElementById("tag").innerText=post.tag
 
-<div>${post.content}</div>
-
-`
+document.getElementById("content").innerHTML=post.content
 
 })
+
+
+// 阅读进度条
+
+window.onscroll=()=>{
+
+let h=document.documentElement
+
+let percent=h.scrollTop/(h.scrollHeight-h.clientHeight)
+
+document.querySelector(".progress").style.width=percent*100+"%"
+
+}
 
 </script>
 

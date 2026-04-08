@@ -1,22 +1,86 @@
+// 打字机
+
+const text="欢迎来到我的开发者博客"
+
+let i=0
+
+function typing(){
+
+if(i<text.length){
+
+document.getElementById("typing").innerHTML+=text[i]
+
+i++
+
+setTimeout(typing,80)
+
+}
+
+}
+
+typing()
+
+
+
+// 主题切换
+
+document.getElementById("themeToggle").onclick=()=>{
+
+document.body.classList.toggle("dark")
+
+}
+
+
+
+// 平滑滚动
+
+function scrollToSection(id){
+
+document.getElementById(id).scrollIntoView({
+
+behavior:"smooth"
+
+})
+
+}
+
+
+
+// 加载博客
+
+let allPosts=[]
+
 fetch("posts.json")
 
-.then(res=>res.json())
+.then(r=>r.json())
 
-.then(posts=>{
+.then(data=>{
+
+allPosts=data
+
+renderPosts(data)
+
+})
+
+
+
+function renderPosts(posts){
 
 let html=""
 
-posts.forEach(post=>{
+posts.forEach(p=>{
 
 html+=`
 
-<div class="post">
+<div class="card"
 
-<a href="post.html?id=${post.id}">
-${post.title}
-</a>
+onclick="location.href='post.html?id=${p.id}'">
 
-<p>${post.date}</p>
+<h3>${p.title}</h3>
+
+<p>${p.date}</p>
+
+<p>${p.tag}</p>
 
 </div>
 
@@ -26,29 +90,108 @@ ${post.title}
 
 document.getElementById("posts").innerHTML=html
 
+}
+
+
+
+// 搜索
+
+document.getElementById("search").oninput=(e)=>{
+
+let q=e.target.value.toLowerCase()
+
+let filtered=allPosts.filter(p=>
+
+p.title.toLowerCase().includes(q)
+
+)
+
+renderPosts(filtered)
+
+}
+
+
+
+// 项目展示
+
+fetch("projects.json")
+
+.then(r=>r.json())
+
+.then(data=>{
+
+let html=""
+
+data.forEach(p=>{
+
+html+=`
+
+<div class="card">
+
+<h3>${p.name}</h3>
+
+<p>${p.desc}</p>
+
+</div>
+
+`
+
+})
+
+document.getElementById("projectList").innerHTML=html
+
 })
 
 
-// 鼠标背景粒子
 
-document.addEventListener("mousemove",function(e){
+// 粒子背景
 
-let circle=document.createElement("div")
+const canvas=document.getElementById("bg")
 
-circle.style.position="fixed"
-circle.style.left=e.clientX+"px"
-circle.style.top=e.clientY+"px"
-circle.style.width="6px"
-circle.style.height="6px"
-circle.style.background="white"
-circle.style.borderRadius="50%"
+const ctx=canvas.getContext("2d")
 
-document.body.appendChild(circle)
+canvas.width=window.innerWidth
 
-setTimeout(()=>{
+canvas.height=window.innerHeight
 
-circle.remove()
+let particles=[]
 
-},500)
+for(let i=0;i<100;i++){
+
+particles.push({
+
+x:Math.random()*canvas.width,
+
+y:Math.random()*canvas.height,
+
+r:Math.random()*2
 
 })
+
+}
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+ctx.fillStyle="white"
+
+particles.forEach(p=>{
+
+ctx.beginPath()
+
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2)
+
+ctx.fill()
+
+p.y+=0.5
+
+if(p.y>canvas.height)p.y=0
+
+})
+
+requestAnimationFrame(draw)
+
+}
+
+draw()

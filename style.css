@@ -1,4 +1,4 @@
-8body{
+body{
 
 margin:0;
 
@@ -200,29 +200,34 @@ overflow:auto;
 
 }
 
+/* 图片横向滚动相册 */
+
 .gallery{
 width:90%;
 margin:30px auto;
 overflow:hidden;
+position:relative;
 }
 
 .gallery-track{
 display:flex;
 gap:20px;
 width:max-content;
-animation:scroll 25s linear infinite;
+animation:scroll 40s linear infinite;
 }
 
 .gallery img{
 height:110px;
 width:auto;
-border-radius:10px;
+border-radius:12px;
 flex-shrink:0;
 transition:0.4s;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
 }
 
 .gallery img:hover{
-transform:scale(1.1);
+transform:scale(1.15);
+box-shadow:0 15px 35px rgba(0,0,0,0.5);
 }
 
 @keyframes scroll{

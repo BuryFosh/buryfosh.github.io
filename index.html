@@ -2,8 +2,10 @@
 <html>
 
 <head>
+
 <meta charset="UTF-8">
-<title>我的博客</title>
+
+<title>My Blog</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -11,33 +13,52 @@
 
 <body>
 
+<canvas id="bg"></canvas>
+
 <nav>
 
-<div class="logo">
-MyBlog
-</div>
+<div class="logo">MyBlog</div>
 
 <ul>
 
-<li>首页</li>
-<li>博客</li>
-<li>项目</li>
-<li>关于</li>
+<li onclick="scrollToSection('home')">首页</li>
+<li onclick="scrollToSection('blog')">博客</li>
+<li onclick="scrollToSection('projects')">项目</li>
 
 </ul>
+
+<button id="themeToggle">🌙</button>
 
 </nav>
 
 
-<header>
+<header id="home">
 
-<h1>欢迎来到我的博客</h1>
+<h1 id="typing"></h1>
+
 <p>记录编程与生活</p>
+
+<input id="search" placeholder="搜索文章">
 
 </header>
 
 
-<section id="posts"></section>
+<section id="blog">
+
+<h2>博客文章</h2>
+
+<div id="posts"></div>
+
+</section>
+
+
+<section id="projects">
+
+<h2>项目展示</h2>
+
+<div id="projectList"></div>
+
+</section>
 
 
 <script src="script.js"></script>

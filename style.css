@@ -201,16 +201,23 @@ overflow:auto;
 }
 
 .gallery{
-display:flex;
-overflow:hidden;
-gap:20px;
+width:90%;
 margin:30px auto;
-width:80%;
+overflow:hidden;
+}
+
+.gallery-track{
+display:flex;
+gap:20px;
+width:max-content;
+animation:scroll 25s linear infinite;
 }
 
 .gallery img{
-height:120px;
+height:110px;
+width:auto;
 border-radius:10px;
+flex-shrink:0;
 transition:0.4s;
 }
 
@@ -218,11 +225,14 @@ transition:0.4s;
 transform:scale(1.1);
 }
 
-.gallery{
-animation:scroll 20s linear infinite;
+@keyframes scroll{
+
+0%{
+transform:translateX(0);
 }
 
-@keyframes scroll{
-0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
+100%{
+transform:translateX(-50%);
+}
+
 }
